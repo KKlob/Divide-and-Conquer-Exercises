@@ -1,14 +1,23 @@
 function findRotatedIndex(array, num) {
     // first, find pivot point. Pivot point = value in which the next value is lower than it.
     function findPivot(arr, low, high) {
-        //funciton to find pivot index
-        if (high < low) return -1;
-        if (high == low) return low;
+        // base cases
+        if (high < low)
+            return -1;
+        if (high == low)
+            return low;
 
         let mid = Math.floor((low + high) / 2);
-        if (mid < high && arr[mid] > arr[mid + 1]) return mid;
-        if (mid > low && arr[mid] < arr[mid - 1]) return (mid - 1);
-        if (arr[low] >= arr[mid]) return findPivot(arr, mid + 1, high);
+        if (mid < high && arr[mid] > arr[mid + 1])
+            return mid;
+
+        if (mid > low && arr[mid] < arr[mid - 1])
+            return (mid - 1);
+
+        if (arr[low] >= arr[mid])
+            return findPivot(arr, low, mid - 1);
+
+        return findPivot(arr, mid + 1, high);
     }
 
     function binarySearch(array, low, high, key) {
